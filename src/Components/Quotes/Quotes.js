@@ -11,10 +11,12 @@ class Quotes extends React.Component {
         }
         this.handleClick = this.handleClick.bind(this);
     }
+    
     handleClick() {
         this.generateQuote();
     }
 
+    // update component when data is retrieved using AJAX results to set local state
     componentDidMount() {
         fetch('https://ron-swanson-quotes.herokuapp.com/v2/quotes/10')
             .then(result => result.json())
@@ -32,6 +34,8 @@ class Quotes extends React.Component {
     generateQuote = () => {
         const chosenQuote = [];
         const quotes = this.state.apiResult;
+
+        // generates a random number that range from 0 to the length of the quotes array in the Swanson API
         let randomNumber = Math.floor((Math.random() * this.state.apiResult.length) + 1);
 
         quotes.forEach(function(element, index){
@@ -39,6 +43,7 @@ class Quotes extends React.Component {
                 chosenQuote.push(element);
             }
         })
+        //update our text state through the elements pushed in the chosenQuote
         this.setState({ text: chosenQuote })
     }
 
