@@ -20,14 +20,17 @@ class QuoteMainApp extends Component {
     }
 
     handleSmallQuoteClick() {
+        console.log('smallButton was clicked');
         this.generateQuote();
     }
 
     handleMediumQuoteClick() {
+        console.log('mediumButton was clicked');
         this.generateQuote();
     }
 
-    handleLargeQuoteClick() {
+    handleLargeQuoteClick(event) {
+        console.log('largeButton was clicked'); 
         this.generateQuote();
     }
 
@@ -41,15 +44,9 @@ class QuoteMainApp extends Component {
                     show: true,
                     quote: result[0],
                     apiResult: result,
-                    smallQuotes: result.map((number) => { 
-                        return number.split(' ').length
-                    }).filter((word) => { return word <= 4 }),
-                    mediumQuotes: result.map((number) => {
-                        return number.split(' ').length
-                    }).filter((word) => { return word >= 5 && word <= 12 }),
-                    largeQuotes: result.map((number) => {
-                        return number.split(' ').length
-                    }).filter((word) => {return word >= 13 })
+                    smallQuotes: result.filter((word) => { return word.split(' ').length <= 4 }),
+                    mediumQuotes: result.filter((word) => { return word.split(' ').length >= 5 && word.split(' ').length <= 12 }),
+                    largeQuotes: result.filter((word) => { return word.split(' ').length >= 13 })
                 })
             })
             .catch(error => this.setState({ error }));
@@ -57,22 +54,28 @@ class QuoteMainApp extends Component {
 
     generateQuote() {
         // generates a random number that range from 0 to the length of the quotes array in the Swanson API and add 1
-        console.log('this.state.apiResult.length: ' + this.state.apiResult.length);
         let randomNumber = Math.floor((Math.random() * this.state.apiResult.length) + 1);
-       
+        
         this.setState({ quote: this.state.apiResult[randomNumber]})
 
         if (this.handleSmallQuoteClick) {
+            var newSmallQuote = this.state.smallQuotes.slice();
+            newSmallQuote.push(this.state.smallQuotes);
+            this.setState({ smallQuotes: newSmallQuote });
             console.log(this.state.smallQuotes);
-            this.setState({ smallQuotes: this.state.smallQuotes });
         }
         else if (this.handleMediumQuoteClick) {
-            console.log(this.state.mediumQuotes);
-            this.setState({ mediumQuotes: this.state.mediumQuotes });
+            var newMediumQuote = this.state.mediumQuotes.slice();
+            newMediumQuote.push(this.state.mediumQuotes);
+            this.setState({ mediumQuotes: newMediumQuote });
+            // console.log(this.state.mediumQuotes);
         } 
         else if (this.handleLargeQuoteClick)  {
-            console.log(this.state.mediumQuotes);
-            this.setState({ largeQuotes: this.state.largeQuotes });
+            var newlargeQuote = this.state.largeQuotes.slice();
+            newlargeQuote.push(this.state.largeQuotes);
+            this.setState({ largeQuotes: newlargeQuote });
+
+            // console.log(this.state.largeQuotes);
         }
     }
 
