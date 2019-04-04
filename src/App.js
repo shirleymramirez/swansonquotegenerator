@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import Quotes from './Components/Quotes/Quotes';
+import QuoteMainApp from './Components/QuoteMainApp/QuoteMainApp';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Quotes />
+        <h1>Quote Generator from Ron Swanson Quotes API”</h1>
+        <QuoteMainApp />
       </div>
     );
   }

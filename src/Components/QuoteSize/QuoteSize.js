@@ -2,21 +2,35 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 class QuoteSize extends React.Component {
+    
     render() {
-        return(
-            <div> 
-                <h1>Quote Generator from Ron Swanson Quotes API”</h1>
+        return (
+            <div>
                 <Button 
                     className='button'
-                    variant="success" 
+                    id='smallButtonQuotes'
+                    variant='success'
                     onClick={this.props.handleClick}>
-                    Get Quotes
+                    Small Quotes
                 </Button>
-                {/* populate the DOM with quotes once button is clicked */}
-                <p>{this.props.text}</p>
+                <Button
+                    className='button'
+                    id='mediumButtonQuotes'
+                    variant='success'
+                    onClick={this.props.handleClick}>
+                    Medium Quotes
+                </Button>
+                <Button
+                    className='button'
+                    id='largeButtonQuotes'
+                    variant='success'
+                    onClick={this.props.handleClick}>
+                    Large Quotes
+                </Button>
             </div>
-        )
+        )   
     }
 }
+
 
 export default QuoteSize;
