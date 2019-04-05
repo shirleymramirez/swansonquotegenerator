@@ -23,6 +23,7 @@ class QuoteMainApp extends Component {
             .then(result => result.json())
             .then((result) => {
                 this.setState({
+                    // conditions for each button depending on number of words in the quotes
                     smallQuotes: result.filter(words => { return words.split(' ').length <= 4 }),
                     mediumQuotes: result.filter(words => { return words.split(' ').length >= 5 && words.split(' ').length <= 12 }),
                     largeQuotes: result.filter(words => { return words.split(' ').length >= 13 }),
@@ -31,56 +32,37 @@ class QuoteMainApp extends Component {
             .catch(error => this.setState({ error }));
     }
 
-    handleSmallQuoteClick = (e) => {
-        e.preventDefault();
-        console.log('smallButton was clicked');
+    handleSmallQuoteClick() {
         this.generateSmallQuote();
     }
 
-    handleMediumQuoteClick= (e) => {
-        e.preventDefault();
-        console.log('mediumButton was clicked');
+    handleMediumQuoteClick() {
         this.generateMediumQuote();
     }
 
-    handleLargeQuoteClick = (e) => {
-        e.preventDefault();
-        console.log('largeButton was clicked'); 
+    handleLargeQuoteClick() {
         this.generateLargeQuote();
     }
 
-    generateSmallQuote = () => {
-        if(this.handleSmallQuoteClick) {
-            // generates a random number index that range from 0 to the length of the filtered smallQuotes array in the Swanson API
-            const index = Math.floor((Math.random() * this.state.smallQuotes.length));
-            console.log('smallQuotesLength: ' + this.state.smallQuotes.length);
-            console.log('index: ' + index);
-
-            this.setState({ quotes: this.state.smallQuotes[index] });
-            console.log(this.state.quotes);
-           }
+    generateSmallQuote = () => {    
+        // generates a random number index that range from 0 to the length of the filtered smallQuotes array in the Swanson API
+        const index = Math.floor((Math.random() * this.state.smallQuotes.length));
+        //update quotes on the browser with small quotes
+        this.setState({ quotes: this.state.smallQuotes[index] });
     }
 
     generateMediumQuote = () => {
-        if (this.handleMediumQuoteClick) {
-            const index = Math.floor((Math.random() * this.state.mediumQuotes.length));
-            console.log('mediumQuotesLength: ' + this.state.mediumQuotes.length);
-            console.log('index: ' + index);
-
-            this.setState({ quotes: this.state.mediumQuotes[index] });
-            console.log(this.state.quotes);
-        }
+        // generates a random number index that range from 0 to the length of the filtered mediumQuotes array in the Swanson API
+        const index = Math.floor((Math.random() * this.state.mediumQuotes.length));
+        //update quotes on the browser with medium quotes
+        this.setState({ quotes: this.state.mediumQuotes[index] });
     }     
 
     generateLargeQuote = () => {
-        if (this.handleLargeQuoteClick) {
-            const index = Math.floor((Math.random() * this.state.largeQuotes.length));
-            console.log('largeQuotesLength: ' + this.state.largeQuotes.length);
-            console.log('index: ' + index);
-
-            this.setState({ quotes: this.state.largeQuotes[index] });
-            console.log(this.state.quotes);
-        }
+        // generates a random number index that range from 0 to the length of the filtered largeQuotes array in the Swanson API
+        const index = Math.floor((Math.random() * this.state.largeQuotes.length));
+        //update quotes on the browser with large quotes
+        this.setState({ quotes: this.state.largeQuotes[index] });
     }   
 
     render() {
