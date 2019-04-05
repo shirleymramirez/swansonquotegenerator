@@ -10,7 +10,7 @@ class QuoteMainApp extends Component {
             show: false,
             apiResult: null,
             id: false,
-            smallQuotes:[],
+            smallQuotes: [],
             mediumQuotes:[],
             largeQuotes: []
         }
@@ -29,7 +29,7 @@ class QuoteMainApp extends Component {
         this.generateQuote();
     }
 
-    handleLargeQuoteClick(event) {
+    handleLargeQuoteClick() {
         console.log('largeButton was clicked'); 
         this.generateQuote();
     }
@@ -54,28 +54,32 @@ class QuoteMainApp extends Component {
 
     generateQuote() {
         // generates a random number that range from 0 to the length of the quotes array in the Swanson API and add 1
-        let randomNumber = Math.floor((Math.random() * this.state.apiResult.length) + 1);
-        
-        this.setState({ quote: this.state.apiResult[randomNumber]})
 
         if (this.handleSmallQuoteClick) {
-            var newSmallQuote = this.state.smallQuotes.slice();
-            newSmallQuote.push(this.state.smallQuotes);
-            this.setState({ smallQuotes: newSmallQuote });
-            console.log(this.state.smallQuotes);
-        }
-        else if (this.handleMediumQuoteClick) {
-            var newMediumQuote = this.state.mediumQuotes.slice();
-            newMediumQuote.push(this.state.mediumQuotes);
-            this.setState({ mediumQuotes: newMediumQuote });
-            // console.log(this.state.mediumQuotes);
-        } 
-        else if (this.handleLargeQuoteClick)  {
-            var newlargeQuote = this.state.largeQuotes.slice();
-            newlargeQuote.push(this.state.largeQuotes);
-            this.setState({ largeQuotes: newlargeQuote });
+            let randomNumber = Math.floor((Math.random() * this.state.smallQuotes.length) + 1);
+            console.log('smallQuotesLength: ' + this.state.smallQuotes.length);
+            console.log('randomNumber: ' + randomNumber);
 
-            // console.log(this.state.largeQuotes);
+            this.setState({ smallQuotes: this.state.smallQuotes[randomNumber] });
+            console.log("smallQuotes: " + this.state.smallQuotes);
+        }
+
+        if (this.handleMediumQuoteClick) {
+            let randomNumber = Math.floor((Math.random() * this.state.mediumQuotes.length) + 1);
+            console.log('mediumQuotesLength: ' + this.state.mediumQuotes.length);
+            console.log('randomNumber: ' + randomNumber);
+
+            this.setState({ mediumQuotes: this.state.mediumQuotes[randomNumber] });
+            console.log("mediumQuotes: " + this.state.mediumQuotes);
+        } 
+
+        if (this.handleLargeQuoteClick)  {
+            let randomNumber = Math.floor((Math.random() * this.state.largeQuotes.length) + 1);
+            console.log('largeQuotesLength: ' + this.state.largeQuotes.length);
+            console.log('randomNumber: ' + randomNumber);
+
+            this.setState({ largeQuotes: this.state.largeQuotes[randomNumber] });
+            console.log("largeQuotes: " + this.state.largeQuotes);
         }
     }
 
